@@ -1,0 +1,32 @@
+---
+abstract: 'Provides a composable behavior for moving data between Reflex::Streams'
+author:
+  - 'Nicholas R. Perez <nperez@cpan.org>'
+build_requires:
+  File::Temp: 0
+  IO::All: 0
+  Moose: 0
+  Reflex::Base: 0
+  Reflex::Stream: 0
+  Test::More: 0
+  Text::Lorem: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.31
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.102341, CPAN::Meta::Converter version 2.102400'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Reflexive-Role-DataMover
+requires:
+  MooseX::Params::Validate: 0
+  MooseX::Types::Moose: 0
+  MooseX::Types::Structured: 0
+  Reflex::Callbacks: 0
+  Reflex::Role: 0
+  Reflex::Role::Collectible: 0
+  namespace::autoclean: 0
+resources:
+  repository: git://nickandperla.net/reflexive-role-datamover.git
+version: 1.103420
