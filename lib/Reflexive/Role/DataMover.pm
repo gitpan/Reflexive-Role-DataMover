@@ -1,6 +1,6 @@
 package Reflexive::Role::DataMover;
 BEGIN {
-  $Reflexive::Role::DataMover::VERSION = '1.103420';
+  $Reflexive::Role::DataMover::VERSION = '1.110030';
 }
 
 #ABSTRACT: Provides a composable behavior for moving data between Reflex::Streams
@@ -201,7 +201,7 @@ Reflexive::Role::DataMover - Provides a composable behavior for moving data betw
 
 =head1 VERSION
 
-version 1.103420
+version 1.110030
 
 =head1 SYNOPSIS
 

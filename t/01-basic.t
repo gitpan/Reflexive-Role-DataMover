@@ -34,7 +34,7 @@ BEGIN
 my ($fh1, $file1) = tempfile();
 my ($fh2, $file2) = tempfile();
 
-io($file1)->print(Text::Lorem->new()->paragraphs(100000));
+io($file1)->print(Text::Lorem->new()->paragraphs(10));
 
 my $mover = MyDataMover->new
 (
@@ -45,4 +45,6 @@ my $mover = MyDataMover->new
 $mover->run_all();
 
 is(io($file2)->slurp, io($file1)->slurp, 'data streamed appropriately');
+unlink $file1;
+unlink $file2;
 done_testing();

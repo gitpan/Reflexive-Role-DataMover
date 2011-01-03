@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     'Reflex::Role::Collectible' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '1.103420',
+  'VERSION' => '1.110030',
   'test' => {
     'TESTS' => 't/*.t'
   }
