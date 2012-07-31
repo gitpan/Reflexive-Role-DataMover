@@ -1,6 +1,6 @@
 package Reflexive::Role::DataMover;
-BEGIN {
-  $Reflexive::Role::DataMover::VERSION = '1.110030';
+{
+  $Reflexive::Role::DataMover::VERSION = '1.122130';
 }
 
 #ABSTRACT: Provides a composable behavior for moving data between Reflex::Streams
@@ -37,13 +37,13 @@ callback_parameter cb_output_data   => qw/ on output data /;
 
 
 
-event_parameter ev_input_error  => qw/ _ input error /;
+method_parameter ev_input_error  => qw/ _ input error /;
 
 
-event_parameter ev_output_data  => qw/ _ output data /;
+method_parameter ev_output_data  => qw/ _ output data /;
 
 
-event_parameter ev_output_error => qw/ _ output error /;
+method_parameter ev_output_error => qw/ _ output error /;
 
 
 method_parameter method_clear_input     => qw/ clear input _/;
@@ -56,12 +56,12 @@ method_parameter method_clear_output    => qw/ clear output _/;
 parameter internal_flush_method =>
 (
     isa => Str,
-    default => 'flush_handle',
+    default => '_do_handle_flush',
 );
 
 role
 {
-    use Reflex::Callbacks qw/cb_method/;
+    use Reflex::Callbacks(':all');
     use MooseX::Types::Structured(':all');
     use MooseX::Params::Validate;
     use namespace::autoclean;
@@ -84,22 +84,22 @@ role
 
 
 
-    method_emit_and_stop $p->cb_input_error => $p->ev_input_error;
+    make_terminal_emitter $p->cb_input_error => $p->ev_input_error;
 
 
 
-    method_emit_and_stop $p->cb_output_error => $p->ev_output_error;
+    make_terminal_emitter $p->cb_output_error => $p->ev_output_error;
 
 
 
-    method_emit $p->ev_output_data => $p->ev_output_data;
+    make_emitter $p->cb_output_data => $p->ev_output_data;
 
     method BUILD => sub { };
 
 
     after BUILD => sub
     {
-        my $self = shift;
+        my ($self) = @_;
 
         $self->watch
         (
@@ -153,10 +153,10 @@ role
         (
             \@_,
             { does => 'Reflexive::Role::DataMover' },
-            { isa => Dict[data => Any, _sender => Any] },
+            { isa => 'Reflex::Event' },
         );
 
-        $self->${\$p->ev_output_data}($data);
+        $self->${\$p->cb_output_data}($data);
     };
 
 
@@ -166,10 +166,10 @@ role
         (
             \@_,
             { does => 'Reflexive::Role::DataMover' },
-            { isa => Dict[data => Any, _sender => Any] },
+            { isa => 'Reflex::Event::Octets' },
         );
 
-        $self->${\$p->output}->put($args->{data})
+        $self->${\$p->output}->put($args->octets)
     };
 
 
@@ -201,7 +201,7 @@ Reflexive::Role::DataMover - Provides a composable behavior for moving data betw
 
 =head1 VERSION
 
-version 1.110030
+version 1.122130
 
 =head1 SYNOPSIS
 
@@ -336,7 +336,7 @@ attribute.
 
 =head2 internal_flush_method
 
-    default: flush_handle
+    default: _do_handle_flush
 
 internal_flush_method contains the method name of the flush mechanism on the
 output stream. If a default Reflex::Stream is used, there shouldn't be a need
@@ -452,7 +452,7 @@ Nicholas R. Perez <nperez@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Nicholas R. Perez <nperez@cpan.org>.
+This software is copyright (c) 2012 by Nicholas R. Perez <nperez@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -4,41 +4,45 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Provides a composable behavior for moving data between Reflex::Streams',
-  'AUTHOR' => 'Nicholas R. Perez <nperez@cpan.org>',
-  'BUILD_REQUIRES' => {
-    'File::Temp' => '0',
-    'IO::All' => '0',
-    'Moose' => '0',
-    'Reflex::Base' => '0',
-    'Reflex::Stream' => '0',
-    'Test::More' => '0',
-    'Text::Lorem' => '0'
+  "ABSTRACT" => "Provides a composable behavior for moving data between Reflex::Streams",
+  "AUTHOR" => "Nicholas R. Perez <nperez\@cpan.org>",
+  "BUILD_REQUIRES" => {
+    "File::Temp" => 0,
+    "IO::All" => 0,
+    "Moose" => 0,
+    "Reflex::Base" => 0,
+    "Reflex::Stream" => 0,
+    "Test::More" => 0,
+    "Text::Lorem" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'Reflexive-Role-DataMover',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'Reflexive::Role::DataMover',
-  'PREREQ_PM' => {
-    'MooseX::Params::Validate' => '0',
-    'MooseX::Types::Moose' => '0',
-    'MooseX::Types::Structured' => '0',
-    'Reflex::Callbacks' => '0',
-    'Reflex::Role' => '0',
-    'Reflex::Role::Collectible' => '0',
-    'namespace::autoclean' => '0'
+  "DISTNAME" => "Reflexive-Role-DataMover",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "Reflexive::Role::DataMover",
+  "PREREQ_PM" => {
+    "MooseX::Params::Validate" => 0,
+    "MooseX::Types::Moose" => 0,
+    "MooseX::Types::Structured" => 0,
+    "Reflex" => "0.098",
+    "Reflex::Callbacks" => 0,
+    "Reflex::Role" => 0,
+    "Reflex::Role::Collectible" => 0,
+    "Test::More" => "0.92",
+    "namespace::autoclean" => 0
   },
-  'VERSION' => '1.110030',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "1.122130",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 
